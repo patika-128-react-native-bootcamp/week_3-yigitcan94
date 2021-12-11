@@ -12,7 +12,7 @@ const Drawer = createDrawerNavigator();
 export default function Navigation() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator screenOptions={{headerShown: false}}>
+      <Drawer.Navigator >
         <Drawer.Screen
           name="ProductsStack"
           component={ProductsStack}

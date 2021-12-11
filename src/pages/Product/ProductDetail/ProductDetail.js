@@ -1,6 +1,6 @@
 import {useRoute} from '@react-navigation/core';
 import React from 'react';
-import {View, SafeAreaView, Text, ScrollView, Image} from 'react-native';
+import {View, SafeAreaView, Text, ScrollView, Image, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './ProductDetail.styles';
 
@@ -8,6 +8,8 @@ export default function ProductDetail() {
   const route = useRoute();
 
   const {product} = route.params;
+
+  const HandleProductIng = ({item}) => <Text style={styles.badge_label}>{item}</Text>
 
   return (
     <SafeAreaView style={styles.container}>
@@ -23,13 +25,9 @@ export default function ProductDetail() {
           {product.isPopular && <Icon name="star" color="orange" size={25} />}
         </View>
         <ScrollView horizontal bounces={false}>
-          {product.ingredients.map((ing, ind) => {
-            return (
-              <View style={styles.badge_container}>
-                <Text style={styles.badge_label}>{ing}</Text>
-              </View>
-            );
-          })}
+        <View style={styles.badge_container}>  
+        <FlatList data={product.ingredients} renderItem={HandleProductIng} />
+        </View>
         </ScrollView>
         <View style={styles.description_container}>
           <Text style={styles.description}>{product.description}</Text>
@@ -39,3 +37,4 @@ export default function ProductDetail() {
     </SafeAreaView>
   );
 }
+
